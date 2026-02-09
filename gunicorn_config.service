@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn instance to serve Sokolov Web Lab
+After=network.target
+
+[Service]
+User=sokolovmslu
+Group=sokolovmslu
+WorkingDirectory=/home/sokolovmslu/sokolov-web-lab
+Environment="PATH=/home/sokolovmslu/sokolov-web-lab/venv/bin"
+ExecStart=/home/sokolovmslu/sokolov-web-lab/venv/bin/gunicorn --workers 4 --bind 0.0.0.0:80 app:app
+Restart=always
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target
