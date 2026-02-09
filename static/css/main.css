@@ -1,0 +1,836 @@
+/* =========================================
+   1. ПЕРЕМЕННЫЕ И ТЕМЫ
+   ========================================= */
+:root {
+    --color-bg-light: #f5f7fa;
+    --color-bg-card: #ffffff;
+    --color-bg-header: rgba(245, 247, 250, 0.96);
+    --color-bg-input: #ffffff;
+    
+    --color-text: #111827;
+    --color-text-soft: #6b7280;
+    --color-text-inverse: #ffffff;
+    
+    --color-border: #e5e7eb;
+    --color-border-dark: #cbd5e1;
+
+    --color-primary: #0b3b78;
+    --color-accent: #00b3b8;
+    
+    --color-table-header: #4a4a4a;
+    --color-table-row-cyan: #aeeeee;
+    --color-table-cell-yellow: #ffffcc;
+    --color-brown-header: #a52a2a;
+    --color-brown-cell: #fff8dc;
+    --color-brown-border: #d2b48c;
+
+    --radius-lg: 16px;
+    --radius-md: 10px;
+
+    --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.1);
+    --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="dark"] {
+    --color-bg-light: #0f172a;
+    --color-bg-card: #1e293b;
+    --color-bg-header: rgba(15, 23, 42, 0.96);
+    --color-bg-input: #334155;
+    
+    --color-text: #f1f5f9;
+    --color-text-soft: #94a3b8;
+    --color-text-inverse: #f1f5f9;
+
+    --color-border: #334155;
+    --color-border-dark: #475569;
+
+    --color-primary: #38bdf8;   
+    --color-accent: #2dd4bf;
+
+    --color-table-header: #334155;
+    --color-table-row-cyan: #1e3a8a; 
+    --color-table-cell-yellow: #ca8a04; 
+    --color-brown-header: #7f1d1d;
+    --color-brown-cell: #451a03;
+    --color-brown-border: #78350f;
+
+    --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =========================================
+   2. БАЗОВЫЕ СТИЛИ
+   ========================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--color-bg-light);
+    color: var(--color-text);
+    transition: background 0.3s, color 0.3s;
+}
+
+.container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* =========================================
+   3. ХЕДЕР И НАВИГАЦИЯ
+   ========================================= */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--color-bg-header);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    object-fit: contain;
+    background: #ffffff; 
+    padding: 2px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.brand-title {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 1.1rem;
+}
+
+.main-nav {
+    display: flex;
+    gap: 8px;
+    margin-left: 32px;
+    margin-right: auto;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--color-text-soft);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+}
+
+.main-nav a:hover {
+    background: rgba(11, 59, 120, 0.08); 
+    color: var(--color-primary);
+}
+[data-theme="dark"] .main-nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-text-soft);
+    transition: all 0.2s;
+    margin-right: 8px;
+}
+.theme-toggle:hover {
+    background: var(--color-border);
+    color: var(--color-primary);
+}
+.icon-sun { display: none; }
+.icon-moon { display: block; }
+
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+
+/* =========================================
+   4. КНОПКИ
+   ========================================= */
+.btn, .btn-small, .btn-outline-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn, .btn-small {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: #ffffff;
+}
+
+.btn-outline-small {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+.btn-gray {
+    background: var(--color-border);
+    border: 1px solid var(--color-border-dark);
+    padding: 6px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+.btn-gray:hover { opacity: 0.8; }
+
+
+/* =========================================
+   5. ОСНОВНОЙ КОНТЕНТ (LAYOUT)
+   ========================================= */
+.site-main {
+    padding: 32px 0 40px;
+    min-height: calc(100vh - 64px - 80px);
+}
+
+.site-footer {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-card); 
+    padding: 16px 0;
+    font-size: 0.85rem;
+    color: var(--color-text-soft);
+    transition: background 0.3s;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    padding: 32px 0;
+}
+.content-container-wide {
+    padding: 32px 0;
+}
+
+
+/* =========================================
+   6. ГЛАВНАЯ СТРАНИЦА (HERO & NEWS)
+   ========================================= */
+.hero {
+    margin: 32px 0;
+    padding: 40px 32px;
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at top left,
+        rgba(0, 179, 184, 0.15),
+        rgba(11, 59, 120, 0.15),
+        var(--color-bg-card));
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-border);
+}
+
+.hero-text h1 {
+    margin: 0 0 12px;
+    font-size: 2.2rem;
+    color: var(--color-primary);
+}
+
+.hero-subtitle {
+    margin: 0 0 20px;
+    max-width: 520px;
+    color: var(--color-text-soft);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.section-header { margin-bottom: 16px; }
+.section-header h2 { margin: 0 0 4px; }
+.section-subtitle { margin: 0; color: var(--color-text-soft); font-size: 0.95rem; }
+
+.news-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.news-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--color-border);
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.news-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+}
+
+.news-card p {
+    margin: 0 0 16px;
+    font-size: 0.94rem;
+    color: var(--color-text-soft);
+    flex-grow: 1;
+}
+
+.news-tag {
+    align-self: flex-start;
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgba(0, 179, 184, 0.12);
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+
+/* =========================================
+   7. АВТОРИЗАЦИЯ (LOGIN/REGISTER)
+   ========================================= */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.auth-card {
+    background: var(--color-bg-card);
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-border);
+}
+
+.auth-card h1 {
+    margin: 0 0 24px;
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+}
+
+.auth-form { display: flex; flex-direction: column; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-row { display: flex; gap: 16px; }
+.form-row .form-group { flex: 1; }
+
+label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], select, textarea {
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-input);
+    color: var(--color-text);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(0, 179, 184, 0.1);
+}
+
+small { font-size: 0.75rem; color: var(--color-text-soft); }
+
+.btn-full {
+    width: 100%;
+    margin-top: 8px;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.auth-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-text-soft);
+}
+.auth-footer a { color: var(--color-primary); text-decoration: none; font-weight: 500; }
+
+.alert {
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+.alert-danger {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+[data-theme="dark"] .alert-danger {
+    background: #450a0a;
+    color: #fca5a5;
+    border-color: #7f1d1d;
+}
+.alert-danger p { margin: 4px 0; }
+
+
+/* =========================================
+   8. КОНТЕНТ: УТКИ, ЛИСЫ, ПОГОДА
+   ========================================= */
+.card-content {
+    background: var(--color-bg-card);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid var(--color-border);
+}
+
+.image-wrapper {
+    margin: 20px 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-bg-light); 
+}
+.random-img { width: 100%; height: auto; display: block; }
+
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.fox-controls { display: flex; gap: 8px; }
+
+.fox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+.fox-card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    aspect-ratio: 4/3;
+    border: 1px solid var(--color-border);
+}
+.fox-card img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;
+}
+.fox-card:hover img { transform: scale(1.05); }
+.refresh-fox { text-align: center; }
+
+.weather-card {
+    background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-light) 100%);
+    padding: 32px;
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--color-border);
+}
+.weather-header h1 { margin: 0; font-size: 1.8rem; color: var(--color-primary); }
+.weather-main { display: flex; align-items: center; justify-content: center; margin: 10px 0; }
+.weather-temp { font-size: 3.5rem; font-weight: 700; color: var(--color-text); }
+.weather-icon { width: 80px; height: 80px; }
+
+.weather-stats {
+    display: flex; justify-content: space-around; margin: 24px 0; padding: 16px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+.stat-item { display: flex; flex-direction: column; gap: 4px; }
+.stat-label { font-size: 0.75rem; color: var(--color-text-soft); text-transform: uppercase; }
+.stat-value { font-weight: 600; }
+
+.forecast-list { display: flex; justify-content: space-between; margin-top: 16px; }
+.forecast-item { display: flex; flex-direction: column; align-items: center; font-size: 0.9rem; }
+.f-icon { width: 40px; height: 40px; }
+
+.weather-search-form { display: flex; gap: 8px; margin-bottom: 24px; }
+.weather-search-form input {
+    flex: 1; padding: 10px 16px; border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-input);
+    font-size: 0.95rem; outline: none; transition: all 0.2s;
+}
+.weather-search-form input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(11, 59, 120, 0.1);
+}
+.btn-icon {
+    width: 42px; height: 42px; border-radius: 50%; border: none;
+    background: var(--color-primary); color: #fff; font-size: 1.1rem;
+    cursor: pointer; transition: transform 0.2s; display: flex; align-items: center; justify-content: center;
+}
+.btn-icon:hover { transform: scale(1.05); background: var(--color-accent); }
+.weather-error {
+    background: #fef2f2; color: #ef4444; padding: 20px; border-radius: 16px; margin: 20px 0;
+}
+[data-theme="dark"] .weather-error { background: #450a0a; color: #fca5a5; }
+.weather-error p { font-weight: 600; margin: 0 0 4px; font-size: 1.1rem; }
+
+
+/* =========================================
+   9. ДОМАШНИЕ ЗАДАНИЯ
+   ========================================= */
+.text-soft { color: var(--color-text-soft); margin-top: -10px; margin-bottom: 24px; }
+
+.homework-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+    align-items: start;
+}
+.homework-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+.wide-card { grid-column: 1 / -1; }
+
+.hw-header {
+    background: var(--color-bg-light); 
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+.hw-header h3 {
+    margin: 0; font-size: 0.85rem; color: var(--color-text-soft);
+    text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+}
+.hw-content { padding: 24px; }
+.hw-title {
+    margin-top: 0; margin-bottom: 16px;
+    color: var(--color-primary); font-size: 1.1rem;
+}
+
+table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+.simple-table th, .simple-table td {
+    text-align: left; padding: 8px; border-bottom: 1px solid var(--color-border);
+}
+
+.colored-table th {
+    background: var(--color-table-header); color: white;
+    padding: 10px; border: 1px solid var(--color-border-dark);
+}
+.colored-table td {
+    padding: 8px; border: 1px solid var(--color-text); text-align: center;
+}
+.colored-table td:first-child { text-align: left; }
+.row-cyan { background-color: var(--color-table-row-cyan); color: var(--color-text); }
+[data-theme="dark"] .row-cyan { color: white; } /* Белый текст на синем */
+.bg-yellow { background-color: var(--color-table-cell-yellow); color: #000; } /* Желтый всегда черный текст */
+
+.mining-table th, .mining-table td {
+    border: 3px double var(--color-text-soft); padding: 8px; text-align: center;
+}
+.mining-table th { font-weight: bold; }
+
+.brown-table th {
+    background-color: var(--color-brown-header); color: white;
+    padding: 8px; border: 1px solid white;
+}
+.brown-table td {
+    background-color: var(--color-brown-cell);
+    border: 1px solid var(--color-brown-border);
+    color: #555; text-align: center; padding: 6px;
+}
+[data-theme="dark"] .brown-table td { color: #ccc; border-color: #555; }
+.brown-table tr td:first-child { text-align: left; font-weight: bold; color: inherit; }
+
+.map-container { position: relative; display: inline-block; margin-bottom: 16px; }
+.map-img { max-width: 100%; border-radius: 4px; border: 1px solid var(--color-border); display: block; }
+.map-label {
+    position: absolute; top: 50%; left: 45%;
+    background: white; color: black; 
+    padding: 2px 8px; border: 1px solid black; font-size: 0.9rem;
+}
+
+.date-form {
+    border: 1px solid var(--color-border);
+    padding: 20px;
+    background: var(--color-bg-light);
+}
+.form-row-small { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.form-row-small label { width: 100px; text-align: right; font-size: 0.9rem; }
+
+.tex-logo { font-family: "Times New Roman", serif; font-size: 3.5rem; text-align: center; padding: 30px 0; }
+.tex-e { display: inline-block; transform: translateY(0.5ex); margin-left: -0.15em; margin-right: -0.05em; }
+
+.center-poem { text-align: center; font-family: "Times New Roman", serif; }
+.center-poem h2 { font-weight: normal; font-size: 2rem; margin-bottom: 5px; }
+.poem-body { display: inline-block; text-align: left; }
+.year { margin-bottom: 20px; }
+
+.zoo-form fieldset {
+    border: 1px solid var(--color-border);
+    padding: 15px 20px; margin-bottom: 20px;
+}
+.zoo-form legend {
+    padding: 0 5px; color: var(--color-text-soft); font-weight: bold;
+    text-transform: uppercase; font-size: 0.8rem;
+}
+.zoo-row { display: flex; margin-bottom: 12px; align-items: center; }
+.zoo-row label { width: 180px; font-size: 0.95rem; }
+.req { color: #ef4444; }
+.checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+.checkbox-grid label { display: flex; align-items: center; gap: 6px; font-weight: normal; font-size: 0.9rem; }
+
+/* =========================================
+   10. КУРСЫ ВАЛЮТ
+   ========================================= */
+.rates-wrapper {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.rates-card, .converter-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    width: 100%;
+    max-width: 450px;
+}
+
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.card-header-row h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+.date-select-form input {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    font-family: inherit;
+    background: var(--color-bg-input);
+    color: var(--color-text);
+}
+
+.rates-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px; 
+    margin-top: -12px;
+}
+.rates-table th {
+    text-align: left;
+    color: var(--color-text-soft);
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding-bottom: 4px;
+}
+.rates-table td {
+    vertical-align: middle;
+}
+.curr-flag {
+    font-size: 1.8rem;
+    margin-right: 12px;
+    float: left;
+}
+.curr-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+.curr-scale {
+    font-size: 0.75rem;
+    color: var(--color-text-soft);
+}
+.rate-val {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+.curr-code {
+    text-align: right;
+    font-weight: 600;
+    color: var(--color-text-soft);
+    font-size: 0.9rem;
+}
+.rates-info {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-text-soft);
+    margin-top: 16px;
+}
+
+.converter-card h2 {
+    margin: 0 0 20px;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    text-align: center;
+}
+.conv-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.conv-row-group {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.conv-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.conv-arrow {
+    padding-bottom: 12px;
+    font-size: 1.2rem;
+    color: var(--color-text-soft);
+}
+
+.conversion-result {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(0, 179, 184, 0.1);
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 1px solid rgba(0, 179, 184, 0.2);
+}
+.res-from {
+    display: block;
+    color: var(--color-text-soft);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+.res-to {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.lang-toggle {
+    display: flex;
+    background: var(--color-border); 
+    padding: 2px;
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.lang-btn {
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--color-text-soft);
+    transition: all 0.2s ease;
+    min-width: 32px;
+    text-align: center;
+}
+
+.lang-btn:hover {
+    color: var(--color-text);
+}
+
+.lang-btn.active {
+    background: var(--color-bg-card); 
+    color: var(--color-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   ФИКСЫ ДЛЯ СТАБИЛЬНОСТИ ИНТЕРФЕЙСА
+   ========================================= */
+
+.brand-title {
+    white-space: nowrap; 
+    flex-shrink: 0;      
+}
+
+.header-actions .btn, 
+.header-actions .btn-outline-small {
+    min-width: 110px; 
+    text-align: center;
+    padding-left: 0;  
+    padding-right: 0;
+}
+
+.hero-text h1 {
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .brand-title {
+        font-size: 0.9rem; 
+        white-space: normal; 
+    }
+    .hero-text h1 {
+        white-space: normal;
+        font-size: 1.8rem;
+    }
+    .header-actions .btn, 
+    .header-actions .btn-outline-small {
+        min-width: auto; 
+        padding: 6px 12px;
+    }
+}

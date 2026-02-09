@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация — Sokolov Web Lab{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Регистрация</h1>
+
+        {% if errors %}
+        <div class="alert alert-danger">
+            {% for error in errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('register') }}" method="post" class="auth-form">
+            <div class="form-group">
+                <label for="first_name">Имя</label>
+                <input type="text" id="first_name" name="first_name" 
+                       value="{{ form_data.get('first_name', '') if form_data else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Фамилия</label>
+                <input type="text" id="last_name" name="last_name" 
+                       value="{{ form_data.get('last_name', '') if form_data else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Возраст</label>
+                <input type="number" id="age" name="age" 
+                       value="{{ form_data.get('age', '') if form_data else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" 
+                       value="{{ form_data.get('email', '') if form_data else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="login">Логин</label>
+                <input type="text" id="login" name="login" 
+                       value="{{ form_data.get('login', '') if form_data else '' }}" required>
+                <small>Латинские буквы, цифры, _, от 6 до 20 символов</small>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required>
+                <small>8-15 символов: A-Z, a-z, 0-9</small>
+            </div>
+
+            <button type="submit" class="btn btn-full">Создать аккаунт</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Уже есть аккаунт? <a href="{{ url_for('login') }}">Войти</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

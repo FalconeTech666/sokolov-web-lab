@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Курсы валют — Sokolov Web Lab{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="rates-wrapper">
+        
+        <!-- Блок 1: Таблица курсов -->
+        <div class="rates-card">
+            <div class="card-header-row">
+                <h1>Курсы НБРБ</h1>
+                <!-- Форма выбора даты -->
+                <form action="{{ url_for('rates') }}" method="post" class="date-select-form">
+                    <input type="date" name="date_picker" value="{{ selected_date }}" onchange="this.form.submit()">
+                </form>
+            </div>
+            
+            {% if rates %}
+            <table class="rates-table">
+                <thead>
+                    <tr>
+                        <th>Валюта</th>
+                        <th>Курс</th>
+                        <th>Код</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="curr-flag">🇺🇸</div>
+                            <div>
+                                <div class="curr-name">Доллар США</div>
+                                <div class="curr-scale">за {{ rates['USD']['scale'] }} шт.</div>
+                            </div>
+                        </td>
+                        <td class="rate-val">{{ rates['USD']['rate'] }}</td>
+                        <td class="curr-code">USD</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="curr-flag">🇪🇺</div>
+                            <div>
+                                <div class="curr-name">Евро</div>
+                                <div class="curr-scale">за {{ rates['EUR']['scale'] }} шт.</div>
+                            </div>
+                        </td>
+                        <td class="rate-val">{{ rates['EUR']['rate'] }}</td>
+                        <td class="curr-code">EUR</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="curr-flag">🇷🇺</div>
+                            <div>
+                                <div class="curr-name">Российский рубль</div>
+                                <div class="curr-scale">за {{ rates['RUB']['scale'] }} шт.</div>
+                            </div>
+                        </td>
+                        <td class="rate-val">{{ rates['RUB']['rate'] }}</td>
+                        <td class="curr-code">RUB</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="rates-info">Официальный курс на {{ selected_date }}</p>
+            {% else %}
+                <p class="error-msg">Не удалось загрузить курсы на эту дату.</p>
+            {% endif %}
+        </div>
+
+        <!-- Блок 2: Конвертер -->
+        <div class="converter-card">
+            <h2>Конвертер валют</h2>
+            <form action="{{ url_for('rates') }}" method="post" class="converter-form">
+                <!-- Скрытое поле, чтобы передать дату расчета, если пользователь ее не менял -->
+                <input type="hidden" name="calc_date" value="{{ selected_date }}">
+                
+                <div class="conv-row">
+                    <label>Сумма</label>
+                    <input type="number" step="0.01" name="amount" placeholder="100" required 
+                           value="{{ conversion.amount if conversion else '' }}">
+                </div>
+
+                <div class="conv-row-group">
+                    <div class="conv-col">
+                        <label>Из</label>
+                        <select name="currency_from">
+                            <option value="BYN" {% if conversion and conversion['from'] == 'BYN' %}selected{% endif %}>BYN</option>
+                            <option value="USD" {% if conversion and conversion['from'] == 'USD' %}selected{% endif %}>USD</option>
+                            <option value="EUR" {% if conversion and conversion['from'] == 'EUR' %}selected{% endif %}>EUR</option>
+                            <option value="RUB" {% if conversion and conversion['from'] == 'RUB' %}selected{% endif %}>RUB</option>
+                        </select>
+                    </div>
+                    <div class="conv-arrow">➝</div>
+                    <div class="conv-col">
+                        <label>В</label>
+                        <select name="currency_to">
+                            <option value="USD" {% if conversion and conversion['to'] == 'USD' %}selected{% endif %}>USD</option>
+                            <option value="BYN" {% if conversion and conversion['to'] == 'BYN' %}selected{% endif %}>BYN</option>
+                            <option value="EUR" {% if conversion and conversion['to'] == 'EUR' %}selected{% endif %}>EUR</option>
+                            <option value="RUB" {% if conversion and conversion['to'] == 'RUB' %}selected{% endif %}>RUB</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-full">Рассчитать</button>
+            </form>
+
+            {% if conversion %}
+            <div class="conversion-result">
+                <span class="res-from">{{ conversion.amount }} {{ conversion['from'] }} =</span>
+                <span class="res-to">{{ conversion.result }} {{ conversion['to'] }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

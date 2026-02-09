@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Случайная утка — Sokolov Web Lab{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="card-content">
+        <h1>Случайная утка</h1>
+        <p class="duck-number">Утка #{{ duck_number }}</p>
+
+        <div class="image-wrapper">
+            <img src="{{ image_url }}" alt="Случайная утка" class="random-img">
+        </div>
+        
+        <div class="card-actions">
+            <a href="{{ url_for('duck') }}" class="btn btn-full">Следующая утка 🦆</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

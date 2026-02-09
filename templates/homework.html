@@ -1,0 +1,413 @@
+{% extends "base.html" %}
+
+{% block title %}Домашние задания — Sokolov Web Lab{% endblock %}
+
+{% block content %}
+<div class="content-container-wide">
+    <div class="page-header">
+        <h1>Практика HTML/CSS</h1>
+        <p class="text-soft">Выполненные задания по верстке из курса</p>
+    </div>
+
+    <div class="homework-grid">
+        
+        <div class="homework-card">
+            <div class="hw-header">
+                <h3>1. Теги форматирования текста</h3>
+            </div>
+            <div class="hw-content">
+                <h4 class="hw-title">Стихотворение</h4>
+                <p>
+                    Мириады маленьких дел<br>
+                    Пьют по капле гаснущий день,<br>
+                    А <span style="font-style: italic;">дела большие</span> сушит жажда.<br>
+                    Оставляя все на «потом»,<br>
+                    Прозреваем задним числом,<br>
+                    Только день <strong>не повторится</strong> дважды.
+                </p>
+                <p><em>И.Тальков</em></p>
+            </div>
+        </div>
+
+        <div class="homework-card">
+            <div class="hw-header">
+                <h3>2. Вложенные списки</h3>
+            </div>
+            <div class="hw-content">
+                <h4 class="hw-title">Генераторы</h4>
+                <ul>
+                    <li>Цвета
+                        <ul>
+                            <li>Color Mixers</li>
+                            <li>Color Tester</li>
+                            <li>Color Pallete</li>
+                        </ul>
+                    </li>
+                    <li>Фавиконы
+                        <ol>
+                            <li>Favicon.cc
+                                <ul class="dashed-list">
+                                    <li><a href="#">Скачать</a></li>
+                                    <li><a href="#">Демо</a></li>
+                                </ul>
+                            </li>
+                            <li>WebLab Favicon</li>
+                        </ol>
+                    </li>
+                    <li>Фоны
+                        <ul>
+                            <li>BgMaker</li>
+                            <li>StripeGenerator</li>
+                        </ul>
+                    </li>
+                    <li>Изображения
+                        <ol>
+                            <li>Buttonator</li>
+                            <li>AjaxLoad</li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="homework-card wide-card">
+            <div class="hw-header">
+                <h3>3. Простая таблица</h3>
+            </div>
+            <div class="hw-content">
+                <h4 class="hw-title">Химические элементы</h4>
+                <hr>
+                <table class="simple-table">
+                    <thead>
+                        <tr>
+                            <th>Номер</th>
+                            <th>Название</th>
+                            <th>Символ</th>
+                            <th>Год</th>
+                            <th>Статья</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><a href="#">Водород</a></td>
+                            <td><strong>H</strong></td>
+                            <td>1766</td>
+                            <td>📝</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><a href="#">Гелий</a></td>
+                            <td><strong>He</strong></td>
+                            <td>1895</td>
+                            <td>📝</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><a href="#">Бор</a></td>
+                            <td><strong>B</strong></td>
+                            <td>1808</td>
+                            <td>📝</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="homework-card">
+            <div class="hw-header">
+                <h3>4. Изображения и блоки</h3>
+            </div>
+            <div class="hw-content">
+                <h4 class="hw-title">Карта сокровищ</h4>
+                <div class="map-container">
+                    <img src="https://img.freepik.com/premium-vector/map-treasures-paper-parchment_8071-3421.jpg" 
+                         alt="Карта сокровищ" class="map-img">
+                    <span class="map-label">Клад</span>
+                </div>
+                
+                <div class="progress-wrapper">
+                    <span>Пройдено:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="homework-card wide-card">
+            <div class="hw-header">
+                <h3>5. Стилизация таблиц</h3>
+            </div>
+            <div class="hw-content">
+                <table class="colored-table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Цвет</th>
+                            <th>Твердость по Моосу</th>
+                            <th>Формула</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-cyan">
+                            <td>Алмаз</td>
+                            <td class="bg-yellow">Белый</td>
+                            <td>10</td>
+                            <td class="bg-yellow">C</td>
+                        </tr>
+                        <tr class="row-cyan">
+                            <td>Рубин</td>
+                            <td class="bg-yellow">Красный</td>
+                            <td>9</td>
+                            <td class="bg-yellow">Al<sub>2</sub>O<sub>3</sub></td>
+                        </tr>
+                        <tr class="row-cyan">
+                            <td>Аметист</td>
+                            <td class="bg-yellow">Голубой</td>
+                            <td>7</td>
+                            <td class="bg-yellow">SiO<sub>2</sub></td>
+                        </tr>
+                        <tr class="row-cyan">
+                            <td>Изумруд</td>
+                            <td class="bg-yellow">Зеленый</td>
+                            <td>8</td>
+                            <td class="bg-yellow">Be<sub>3</sub>Al<sub>2</sub>(SiO<sub>3</sub>)<sub>6</sub></td>
+                        </tr>
+                        <tr class="row-cyan">
+                            <td>Сапфир</td>
+                            <td class="bg-yellow">Голубой</td>
+                            <td>9</td>
+                            <td class="bg-yellow">Al<sub>2</sub>O<sub>3</sub></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="homework-card wide-card">
+            <div class="hw-header">
+                <h3>6. Объединение ячеек (colspan/rowspan)</h3>
+            </div>
+            <div class="hw-content">
+                <h4 class="hw-title" style="text-align: center;">Добыча драгоценных камней</h4>
+                <table class="mining-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>2010</th>
+                            <th>2012</th>
+                            <th>2014</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; font-weight: bold;">Сапфиры</td>
+                            <td rowspan="2">1483</td>
+                            <td>4532</td>
+                            <td>6743</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; font-weight: bold;">Рубины</td>
+                            <td>3835</td>
+                            <td>7482</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; font-weight: bold;">Алмазы</td>
+                            <td>683</td>
+                            <td colspan="2">238</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="homework-card">
+            <div class="hw-header">
+                <h3>7. Стилизация заголовков таблицы</h3>
+            </div>
+            <div class="hw-content">
+                <table class="brown-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>2004</th>
+                            <th>2005</th>
+                            <th>2006</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Рубины</td>
+                            <td>43</td>
+                            <td>51</td>
+                            <td>79</td>
+                        </tr>
+                        <tr>
+                            <td>Изумруды</td>
+                            <td>28</td>
+                            <td>34</td>
+                            <td>48</td>
+                        </tr>
+                        <tr>
+                            <td>Сапфиры</td>
+                            <td>29</td>
+                            <td>57</td>
+                            <td>36</td>
+                        </tr>
+                        <tr>
+                            <td>Аметисты</td>
+                            <td>23</td>
+                            <td>64</td>
+                            <td>97</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="homework-card">
+            <div class="hw-header">
+                <h3>8. Работа со шрифтами</h3>
+            </div>
+            <div class="hw-content">
+                <div class="tex-logo">
+                    Joy of T<span class="tex-e">E</span>X
+                </div>
+            </div>
+        </div>
+
+        <div class="homework-card">
+            <div class="hw-header">
+                <h3>9. HTML5 Input Types</h3>
+            </div>
+            <div class="hw-content">
+                <form class="date-form">
+                    <div class="form-row-small">
+                        <label>Неделя:</label>
+                        <input type="week" value="2016-W09">
+                    </div>
+                    <div class="form-row-small">
+                        <label>Дата и время:</label>
+                        <input type="datetime-local" value="2016-03-17T09:50">
+                    </div>
+                    <div class="form-row-small">
+                        <label>Месяц:</label>
+                        <input type="month" value="2016-03">
+                    </div>
+                    <div class="form-row-small">
+                        <label>Время:</label>
+                        <input type="time" value="22:19">
+                    </div>
+                    <button type="button" class="btn-gray">Отправить</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="homework-card">
+            <div class="hw-header">
+                <h3>10. Выравнивание текста</h3>
+            </div>
+            <div class="hw-content center-poem">
+                <h2>Евгений Евтушенко</h2>
+                <p class="year">— 1955 —</p>
+                <div class="poem-body">
+                    <p>
+                        Бывало, спит у ног собака,<br>
+                        костер занявшийся гудит,<br>
+                        и женщина из полумрака<br>
+                        глазами зыбкими глядит.
+                    </p>
+                    <br>
+                    <p>
+                        Потом под пихтою приляжет<br>
+                        на куртку рыжую мою<br>
+                        и мне,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;задумчивая,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;скажет:<br>
+                        «А ну-ка, спой!..» –<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;и я пою.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="homework-card wide-card">
+            <div class="hw-header">
+                <h3>11. Сложная форма (Fieldset/Legend)</h3>
+            </div>
+            <div class="hw-content">
+                <h2 style="font-family: serif; text-align:center; margin-top:0;">Форма заявки на работу в зоопарке</h2>
+                <p style="text-align:center; font-style:italic; font-size: 0.9rem; color:#666; margin-bottom: 20px;">
+                    Пожалуйста, заполните форму. Обязательные поля помечены <span style="color:red">*</span>
+                </p>
+
+                <form class="zoo-form">
+                    <fieldset>
+                        <legend>Контактная информация</legend>
+                        <div class="zoo-row">
+                            <label>Имя <span class="req">*</span></label>
+                            <input type="text">
+                        </div>
+                        <div class="zoo-row">
+                            <label>Телефон</label>
+                            <input type="tel">
+                        </div>
+                        <div class="zoo-row">
+                            <label>Email <span class="req">*</span></label>
+                            <input type="email">
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Персональная информация</legend>
+                        <div class="zoo-row">
+                            <label>Возраст<span class="req">*</span></label>
+                            <input type="text">
+                        </div>
+                        <div class="zoo-row">
+                            <label>Пол</label>
+                            <select><option>Женщина</option><option>Мужчина</option></select>
+                        </div>
+                        <div class="zoo-row align-top">
+                            <label>Перечислите<br>личные<br>качества</label>
+                            <textarea rows="4"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Выберите ваших любимых животных</legend>
+                        <div class="checkbox-grid">
+                            <label><input type="checkbox"> Зебра</label>
+                            <label><input type="checkbox"> Кошак</label>
+                            <label><input type="checkbox"> Анаконда</label>
+                            <label><input type="checkbox"> Человек</label>
+                            <label><input type="checkbox"> Слон</label>
+                            <label><input type="checkbox"> Антилопа</label>
+                            <label><input type="checkbox"> Голубь</label>
+                            <label><input type="checkbox"> Краб</label>
+                        </div>
+                    </fieldset>
+                    
+                    <button type="button" class="btn-gray" style="margin-top:10px;">Отправить информацию</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="homework-card">
+            <div class="hw-header">
+                <h3>12. Заголовки и ссылки</h3>
+            </div>
+            <div class="hw-content" style="background: #e8e8d8; padding: 30px;">
+                <h1 style="color: #5a3812; margin-top:0;">Заголовок первого уровня</h1>
+                <h2 style="color: #000;">Заголовок второго уровня</h2>
+                <h3 style="color: #8b5a2b; font-weight: normal;">Заголовок третьего уровня</h3>
+                <p style="margin-top: 20px;">
+                    Пример ссылки <a href="#" style="color: #3f6e2b; text-decoration: underline;">ведущей на другую страницу</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

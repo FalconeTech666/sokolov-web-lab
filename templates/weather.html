@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Погода — Sokolov Web Lab{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="weather-card">
+        
+        <form action="{{ url_for('weather') }}" method="post" class="weather-search-form">
+            <input type="text" name="city" placeholder="Введите город..." required 
+                   value="{{ city_display if city_display and city_display != 'Minsk' else '' }}">
+            <button type="submit" class="btn-icon">🔍</button>
+        </form>
+
+        {% if error_message %}
+            <div class="weather-error">
+                <p>😕 {{ error_message }}</p>
+                <small>Попробуйте другое название</small>
+            </div>
+        {% elif temp is not none %}
+            <header class="weather-header">
+                <h1>{{ city_display|capitalize }}</h1>
+                <p class="weather-desc">{{ description|capitalize }}</p>
+                <div class="weather-main">
+                    <img src="{{ icon_url }}" alt="icon" class="weather-icon">
+                    <span class="weather-temp">{{ temp|round|int }}°</span>
+                </div>
+                <p class="weather-details">Ощущается как {{ feels_like|round|int }}°</p>
+            </header>
+
+            <div class="weather-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Влажность</span>
+                    <span class="stat-value">{{ humidity }}%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Ветер</span>
+                    <span class="stat-value">{{ wind_speed }} м/с</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Давление</span>
+                    <span class="stat-value">{{ pressure }} гПа</span>
+                </div>
+            </div>
+
+            {% if forecast_days %}
+            <div class="forecast-section">
+                <h3>Прогноз на 4 дня</h3>
+                <div class="forecast-list">
+                    {% for day in forecast_days %}
+                    <div class="forecast-item">
+                        <span class="f-date">{{ day.date }}</span>
+                        <img src="{{ day.icon_url }}" alt="icon" class="f-icon">
+                        <span class="f-temp">{{ day.temp|round|int }}°</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="weather-footer">
+                <small>Обновлено: {{ updated_at }}</small>
+            </div>
+        
+        {% else %}
+            <p style="margin-top:20px;">Введите название города, чтобы узнать погоду.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

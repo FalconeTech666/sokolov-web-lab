@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Вход — Sokolov Web Lab{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Вход</h1>
+        
+        <!-- Вывод ошибок -->
+        {% if errors %}
+        <div class="alert alert-danger">
+            {% for error in errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('login') }}" method="post" class="auth-form">
+            <div class="form-group">
+                <label for="login">Логин</label>
+                <input type="text" id="login" name="login" 
+                       value="{{ form_data.get('login', '') if form_data else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-full">Войти</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Нет аккаунта? <a href="{{ url_for('register') }}">Зарегистрироваться</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

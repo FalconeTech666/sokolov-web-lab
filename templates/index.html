@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t.menu_home }} — Sokolov Web Lab{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>{{ t.hero_title }}</h1>
+            <p class="hero-subtitle">{{ t.hero_desc }}</p>
+            <div class="hero-actions">
+                <a href="{{ url_for('homework') }}" class="btn">{{ t.btn_hw }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="news">
+    <div class="section-header">
+        <h2>{{ t.news_title }}</h2>
+        <p class="section-subtitle">{{ t.news_desc }}</p>
+    </div>
+
+    <div class="news-grid">
+        <div class="news-card">
+            <h3>{{ t.card_launch_title }}</h3>
+            <p>{{ t.card_launch_text }}</p>
+            <span class="news-tag">{{ t.tag_project }}</span>
+        </div>
+
+        <div class="news-card">
+            <h3>{{ t.card_hw_title }}</h3>
+            <p>{{ t.card_hw_text }}</p>
+            <span class="news-tag">{{ t.tag_hw }}</span>
+        </div>
+
+        <div class="news-card">
+            <h3>{{ t.card_api_title }}</h3>
+            <p>{{ t.card_api_text }}</p>
+            <span class="news-tag">{{ t.tag_api }}</span>
+        </div>
+
+        <div class="news-card">
+            <h3>{{ t.card_ui_title }}</h3>
+            <p>{{ t.card_ui_text }}</p>
+            <span class="news-tag">{{ t.tag_ui }}</span>
+        </div>
+    </div>
+</section>
+{% endblock %}

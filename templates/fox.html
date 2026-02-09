@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Лисы — Sokolov Web Lab{% endblock %}
+
+{% block content %}
+<div class="content-container-wide">
+    <div class="page-header">
+        <h1>Коллекция лис ({{ count }})</h1>
+        <div class="fox-controls">
+            <!-- Пример ссылок для переключения количества -->
+            <a href="{{ url_for('fox', count=1) }}" class="btn-outline-small">1</a>
+            <a href="{{ url_for('fox', count=3) }}" class="btn-outline-small">3</a>
+            <a href="{{ url_for('fox', count=6) }}" class="btn-outline-small">6</a>
+        </div>
+    </div>
+
+    <div class="fox-grid">
+        {% for img_url in images %}
+        <div class="fox-card">
+            <img src="{{ img_url }}" alt="Лиса" loading="lazy">
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="refresh-fox">
+        <a href="{{ url_for('fox', count=count) }}" class="btn">Обновить коллекцию 
+🦊</a>
+    </div>
+</div>
+{% endblock %}
