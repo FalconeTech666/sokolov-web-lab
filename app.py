@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from models import db, User, News
+from admin_panel import setup_admin
 import requests
 import re
 
@@ -14,30 +16,10 @@ app.secret_key = 'super_secret_key_sokolov_2026'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+db.init_app(app)
 
-class User(db.Model):
-    __tablename__ = 'users'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    login = db.Column(db.String(20), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    first_name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50), nullable=False)
-    age = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+setup_admin(app)
 
-    def set_password(self, password):
-        """Хеширует пароль и сохраняет в поле password_hash"""
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        """Проверяет, соответствует ли введённый пароль сохранённому хешу"""
-        return check_password_hash(self.password_hash, password)
-
-with app.app_context():
-    db.create_all()
 
 @app.route('/set-lang/<lang_code>')
 def set_lang(lang_code):
@@ -304,6 +286,9 @@ def homework():
 def page_not_found(e):
     user = get_current_user()
     return render_template('404.html', user=user), 404
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True)
