@@ -2,9 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
+from models import db
 from datetime import datetime
-from models import db, User, News
-from admin_panel import setup_admin
 import requests
 import re
 
@@ -17,6 +16,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+
+from models import User, News
+from admin_panel import setup_admin
 
 setup_admin(app)
 
