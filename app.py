@@ -62,7 +62,7 @@ def login_required(view):
 def index():
     user = get_current_user()
     
-    db_news = News.query.order_by(News.date.desc()).all()
+    db_news = News.query.order_by(News.id.desc()).all()
     
     return render_template('index.html', user=user, news=db_news)
 
