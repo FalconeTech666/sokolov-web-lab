@@ -23,21 +23,30 @@
 
     <div class="news-grid">
         
+        <!-- Свежие посты -->
         {% for item in news %}
         <div class="news-card" style="border-left: 4px solid #3498db;"> 
             
             {% if item.image %}
-                <img src="{{ item.image }}" alt="" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">
+                <img src="{{ url_for('static', filename='img/' + item.image) }}" alt="" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">
             {% endif %}
 
             <h3>{{ item.title }}</h3>
-            
             <p>{{ item.text }}</p>
-            
-            <span class="news-tag">{{ item.date.strftime('%d.%m.%Y') }}</span>
+            <span class="news-tag">{{ item.tag }}</span>
         </div>
         {% endfor %}
 
+
+        <!--новость о запуске-->
+        <div class="news-card">
+            <h3>{{ t.card_launch_title }}</h3>
+            <p>{{ t.card_launch_text }}</p>
+            <span class="news-tag">{{ t.tag_project }}</span>
+        </div>
+
+
+        <!-- остальные статичные карточки с новостями -->
         <div class="news-card">
             <h3>{{ t.card_hw_title }}</h3>
             <p>{{ t.card_hw_text }}</p>
@@ -55,6 +64,7 @@
             <p>{{ t.card_ui_text }}</p>
             <span class="news-tag">{{ t.tag_ui }}</span>
         </div>
+
     </div>
 </section>
 {% endblock %}
