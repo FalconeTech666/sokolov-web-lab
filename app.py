@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager,login_user, current_user
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db
@@ -113,8 +113,9 @@ def register():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-    user = get_current_user()
-    
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         login_input = request.form.get('login', '').strip()
         password = request.form.get('password', '').strip()
@@ -122,12 +123,17 @@ def login():
         user_obj = User.query.filter_by(login=login_input).first()
 
         if user_obj and user_obj.check_password(password):
-            session['user_login'] = user_obj.login
+            login_user(user_obj)
+            
+            next_page = request.args.get('next')
+            if next_page:
+                return redirect(next_page)
+            
             return redirect(url_for('index'))
         else:
-            return render_template('login.html', user=user, errors=['Неверный логин или пароль'])
+            return render_template('login.html', user=current_user, errors=['Неверный логин или пароль'])
 
-    return render_template('login.html', user=user)
+    return render_template('login.html', user=current_user)
 
 @app.route('/logout/')
 def logout():
