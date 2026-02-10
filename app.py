@@ -61,7 +61,10 @@ def login_required(view):
 @app.route('/')
 def index():
     user = get_current_user()
-    return render_template('index.html', user=user)
+    
+    db_news = News.query.order_by(News.date.desc()).all()
+    
+    return render_template('index.html', user=user, news=db_news)
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
