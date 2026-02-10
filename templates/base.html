@@ -6,6 +6,22 @@
     <title>{% block title %}Sokolov Web Lab{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const htmlElement = document.documentElement;
+
+            if (savedTheme) {
+                htmlElement.setAttribute('data-theme', savedTheme);
+            } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                }
+            }
+        })();
+    </script>
 </head>
 <body>
 
