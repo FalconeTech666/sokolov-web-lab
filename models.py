@@ -24,10 +24,11 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
 class News(db.Model):
-    __tablename__ = 'news'  
-    
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    text = db.Column(db.Text, nullable=False)
-    image = db.Column(db.String(200))
-    tag = db.Column(db.String(30), default='News') 
+    __tablename__ = 'news'
+    id       = db.Column(db.Integer, primary_key=True)
+    title    = db.Column(db.String(100), nullable=False)  
+    text     = db.Column(db.Text, nullable=False)          
+    title_en = db.Column(db.String(100), nullable=True)    
+    text_en  = db.Column(db.Text, nullable=True)           
+    image    = db.Column(db.String(200))
+    tag      = db.Column(db.String(30), default='News')

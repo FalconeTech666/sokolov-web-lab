@@ -32,14 +32,33 @@
                 <span class="brand-title">Sokolov Web Lab</span>
             </a>
 
-            <nav class="main-nav">
-                <a href="{{ url_for('index') }}">{{ t.menu_home }}</a>
-                <a href="{{ url_for('duck') }}">{{ t.menu_ducks }}</a>
-                <a href="{{ url_for('fox') }}">{{ t.menu_foxes }}</a>
-                <a href="{{ url_for('weather') }}">{{ t.menu_weather }}</a>
-                <a href="{{ url_for('rates') }}">{{ t.menu_rates }}</a>
-                <a href="{{ url_for('homework') }}">{{ t.menu_homework }}</a>
-            </nav>
+                <nav class="main-nav">
+                    <a href="{{ url_for('index') }}">{{ t.menu_home }}</a>
+                    
+                    <!-- Выпадающий список "Мини-аппы" -->
+                    <div class="nav-dropdown">
+                        <a href="#" class="dropdown-toggle">{{ t.menu_apps }} ▾</a>
+                        <div class="dropdown-menu">
+                            <a href="{{ url_for('duck') }}">🦆 {{ t.menu_ducks }}</a>
+                            <a href="{{ url_for('fox') }}">🦊 {{ t.menu_foxes }}</a>
+                            <a href="{{ url_for('weather') }}">⛅ {{ t.menu_weather }}</a>
+                            <a href="{{ url_for('rates') }}">💱 {{ t.menu_rates }}</a>
+                        </div>
+                    </div>
+
+                    <a href="{{ url_for('homework') }}">{{ t.menu_homework }}</a>
+                    
+                    <!-- Выпадающий список API (остается как мы делали) -->
+                    <div class="nav-dropdown">
+                        <a href="{{ url_for('api_docs_bp.api_index') }}" class="dropdown-toggle">API ▾</a>
+                        <div class="dropdown-menu">
+                            <a href="{{ url_for('api_docs_bp.api_tasks') }}">Tasks API</a>
+                            <a href="{{ url_for('api_docs_bp.api_reminders') }}">Reminders API</a>
+                            <a href="{{ url_for('api_docs_bp.api_validator') }}">Validator API</a>
+                            <a href="{{ url_for('api_docs_bp.api_news') }}">News API</a>
+                        </div>
+                    </div>
+                </nav>
 
             <div class="header-actions">
                 <!-- Переключатель Языка -->

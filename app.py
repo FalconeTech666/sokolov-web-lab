@@ -307,8 +307,21 @@ def page_not_found(e):
     user = get_current_user()
     return render_template('404.html', user=user), 404
 
+from api_docs import api_docs_bp
+app.register_blueprint(api_docs_bp)
+
 with app.app_context():
     db.create_all()
 
+#  ИНТЕГРАЦИЯ FASTAPI ЧЕРЕЗ DISPATCHER 
+from a2wsgi import ASGIMiddleware
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from fastapi_app.main import fastapi_app 
+
+application = DispatcherMiddleware(app, {
+    '/fastapi': ASGIMiddleware(fastapi_app)
+})
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    from werkzeug.serving import run_simple
+    run_simple('0.0.0.0', 5000, application, use_reloader=True)

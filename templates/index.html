@@ -23,7 +23,7 @@
 
     <div class="news-grid">
         
-        <!-- Свежие посты -->
+        <!-- Свежие посты из БД (с поддержкой двух языков) -->
         {% for item in news %}
         <div class="news-card" style="border-left: 4px solid #3498db;"> 
             
@@ -31,22 +31,36 @@
                 <img src="{{ url_for('static', filename='img/' + item.image) }}" alt="" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">
             {% endif %}
 
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.text }}</p>
+            <!-- Вывод заголовка -->
+            <h3>
+                {% if current_lang == 'en' and item.title_en %}
+                    {{ item.title_en }}
+                {% else %}
+                    {{ item.title }}
+                {% endif %}
+            </h3>
+
+            <!-- Вывод текста -->
+            <p>
+                {% if current_lang == 'en' and item.text_en %}
+                    {{ item.text_en }}
+                {% else %}
+                    {{ item.text }}
+                {% endif %}
+            </p>
+
             <span class="news-tag">{{ item.tag }}</span>
         </div>
         {% endfor %}
 
-
-        <!--новость о запуске-->
+        <!-- Новость о запуске -->
         <div class="news-card">
             <h3>{{ t.card_launch_title }}</h3>
             <p>{{ t.card_launch_text }}</p>
             <span class="news-tag">{{ t.tag_project }}</span>
         </div>
 
-
-        <!-- остальные статичные карточки с новостями -->
+        <!-- Остальные статичные карточки с новостями -->
         <div class="news-card">
             <h3>{{ t.card_hw_title }}</h3>
             <p>{{ t.card_hw_text }}</p>

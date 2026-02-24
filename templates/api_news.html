@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}News API{% endblock %}
+
+{% block content %}
+<h1>News API</h1>
+<p>Новостной агрегатор по ключевым словам.</p>
+
+<div class="api-section">
+    <h2>1. Описание API</h2>
+    <p><strong>Назначение:</strong> Поиск новостей по переданным ключевым словам.</p>
+    <ul>
+        <li><code>GET /fastapi/news/?query=keywords&limit=10</code> — Получить новости</li>
+    </ul>
+    <h3>Пример кода</h3>
+    <pre><code># cURL
+curl "http://sokolweblab.ru/fastapi/news/?query=FastAPI&limit=5"</code></pre>
+</div>
+
+<div class="api-section">
+    <h2>2. Тестирование</h2>
+    <div class="api-form-group">
+        <label>Ключевые слова (Query)</label>
+        <input type="text" id="news-query" placeholder="Например: Python FastAPI">
+    </div>
+    
+    <div class="api-form-group">
+        <label>Лимит (Limit)</label>
+        <input type="number" id="news-limit" placeholder="5" value="5">
+    </div>
+
+    <button class="btn" onclick="testNewsApi()">Получить новости</button>
+
+    <div id="news-result" class="api-result">Ожидание запроса...</div>
+</div>
+
+<script>
+async function testNewsApi() {
+    const query = document.getElementById('news-query').value;
+    const limit = document.getElementById('news-limit').value || 5;
+    
+    if (!query) return alert('Введите ключевые слова');
+    
+    const endpoint = `/news/?query=${encodeURIComponent(query)}&limit=${limit}`;
+    await handleApiCall('news-result', 'GET', endpoint);
+}
+</script>
+{% endblock %}

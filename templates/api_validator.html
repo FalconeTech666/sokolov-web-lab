@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Validator API{% endblock %}
+
+{% block content %}
+<h1>JSON Validator API</h1>
+<p>Форматирование и валидация JSON.</p>
+
+<div class="api-section">
+    <h2>1. Описание API</h2>
+    <p><strong>Назначение:</strong> Принимает JSON и опциональную JSON Schema, проверяет и возвращает результат.</p>
+    <ul>
+        <li><code>POST /fastapi/validator/</code> — Валидация JSON</li>
+    </ul>
+    <h3>Пример кода</h3>
+    <pre><code># cURL
+curl -X POST "http://sokolweblab.ru/fastapi/validator/" \
+-H "Content-Type: application/json" \
+-d '{"data": {"name": "Test"}}'</code></pre>
+</div>
+
+<div class="api-section">
+    <h2>2. Тестирование</h2>
+    <div class="api-form-group">
+        <label>JSON Data</label>
+        <textarea id="val-data" rows="4" placeholder='{"name": "Ivan", "age": 25}'></textarea>
+    </div>
+    
+    <div class="api-form-group">
+        <label>JSON Schema (Опционально)</label>
+        <textarea id="val-schema" rows="4" placeholder='{"type": "object", "properties": {"name": {"type": "string"}}}'></textarea>
+    </div>
+
+    <button class="btn" onclick="testValidatorApi()">Проверить / Отформатировать</button>
+
+    <div id="validator-result" class="api-result">Ожидание запроса...</div>
+</div>
+
+<script>
+async function testValidatorApi() {
+    const dataStr = document.getElementById('val-data').value;
+    const schemaStr = document.getElementById('val-schema').value;
+    let payload = {};
+    
+    try {
+        payload.data = dataStr ? JSON.parse(dataStr) : {};
+        if (schemaStr) payload.schema = JSON.parse(schemaStr);
+    } catch (e) {
+        return alert('Ошибка: введен некорректный JSON-формат');
+    }
+
+    await handleApiCall('validator-result', 'POST', '/validator/', payload);
+}
+</script>
+{% endblock %}

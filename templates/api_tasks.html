@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Tasks API{% endblock %}
+
+{% block content %}
+<h1>Tasks API</h1>
+<p>Учебный трекер задач с мини-аналитикой.</p>
+
+<div class="api-section">
+    <h2>1. Описание API</h2>
+    <p><strong>Назначение:</strong> Управление списком задач с поддержкой статусов.</p>
+    <ul>
+        <li><code>GET /fastapi/tasks/</code> — Получить все задачи</li>
+        <li><code>POST /fastapi/tasks/</code> — Создать задачу</li>
+        <li><code>PUT /fastapi/tasks/{id}</code> — Обновить задачу</li>
+        <li><code>DELETE /fastapi/tasks/{id}</code> — Удалить задачу</li>
+    </ul>
+    <h3>Пример кода</h3>
+    <pre><code># cURL
+curl -X POST "http://sokolweblab.ru/fastapi/tasks/" \
+-H "Content-Type: application/json" \
+-d '{"title": "Изучить FastAPI", "description": "Роутеры", "status": "new"}'
+
+# Python
+import requests
+res = requests.post("http://sokolweblab.ru/fastapi/tasks/", json={"title": "Изучить FastAPI", "status": "new"})
+print(res.json())</code></pre>
+</div>
+
+<div class="api-section">
+    <h2>2. Тестирование</h2>
+    <div class="api-form-group">
+        <label>Операция</label>
+        <select id="tasks-op" onchange="toggleTaskFields()">
+            <option value="GET">Получить список (GET)</option>
+            <option value="POST">Создать (POST)</option>
+            <option value="PUT">Обновить (PUT)</option>
+            <option value="DELETE">Удалить (DELETE)</option>
+        </select>
+    </div>
+    
+    <div id="task-id-group" class="api-form-group" style="display: none;">
+        <label>Task ID</label>
+        <input type="number" id="task-id" placeholder="ID задачи">
+    </div>
+
+    <div id="task-payload-group" class="api-form-group" style="display: none;">
+        <label>Название (Title)</label>
+        <input type="text" id="task-title" placeholder="Название задачи">
+        <br><br>
+        <label>Описание (Description)</label>
+        <input type="text" id="task-desc" placeholder="Описание">
+        <br><br>
+        <label>Статус (Status)</label>
+        <input type="text" id="task-status" placeholder="new, in_progress, done">
+    </div>
+
+    <button class="btn" onclick="testTasksApi()">Отправить запрос</button>
+
+    <div id="tasks-result" class="api-result">Ожидание запроса...</div>
+</div>
+
+<script>
+function toggleTaskFields() {
+    const op = document.getElementById('tasks-op').value;
+    document.getElementById('task-id-group').style.display = (op === 'PUT' || op === 'DELETE') ? 'block' : 'none';
+    document.getElementById('task-payload-group').style.display = (op === 'POST' || op === 'PUT') ? 'block' : 'none';
+}
+
+async function testTasksApi() {
+    const op = document.getElementById('tasks-op').value;
+    const taskId = document.getElementById('task-id').value;
+    let endpoint = '/tasks/';
+    let payload = null;
+
+    if (op === 'PUT' || op === 'DELETE') {
+        if (!taskId) return alert('Введите ID задачи');
+        endpoint += taskId;
+    }
+
+    if (op === 'POST' || op === 'PUT') {
+        payload = {
+            title: document.getElementById('task-title').value,
+            description: document.getElementById('task-desc').value,
+            status: document.getElementById('task-status').value || 'new'
+        };
+    }
+    await handleApiCall('tasks-result', op, endpoint, payload);
+}
+</script>
+{% endblock %}

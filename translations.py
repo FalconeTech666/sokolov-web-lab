@@ -2,11 +2,12 @@ texts = {
     'ru': {
         # --- Меню ---
         'menu_home': 'Главная',
+        'menu_apps': 'Мини-аппы',
         'menu_ducks': 'Утки',
         'menu_foxes': 'Лисы',
         'menu_weather': 'Погода',
         'menu_rates': 'Валюты',
-        'menu_homework': 'Домашка',
+        'menu_homework': 'Вёрстка',
         
         # --- Авторизация (кнопки в шапке) ---
         'login': 'Войти',
@@ -47,11 +48,12 @@ texts = {
     'en': {
         # --- Menu ---
         'menu_home': 'Home',
+        'menu_apps': 'Mini-apps',
         'menu_ducks': 'Ducks',
         'menu_foxes': 'Foxes',
         'menu_weather': 'Weather',
         'menu_rates': 'Rates',
-        'menu_homework': 'Homework',
+        'menu_homework': 'Layouts',
         
         # --- Auth ---
         'login': 'Log In',

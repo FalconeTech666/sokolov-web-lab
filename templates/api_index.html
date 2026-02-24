@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}API Лаборатории{% endblock %}
+
+{% block content %}
+<h1>API Лаборатории</h1>
+<p>Демонстрация и тестирование микросервисов на базе FastAPI.</p>
+
+<div class="api-grid">
+    <div class="api-card">
+        <div class="api-tags">
+            <span class="api-tag">API</span>
+            <span class="api-tag">CRUD</span>
+        </div>
+        <h3>Tasks API</h3>
+        <p>Учебный трекер задач с мини-аналитикой (создание, чтение, обновление, удаление).</p>
+        <a href="{{ url_for('api_docs_bp.api_tasks') }}" class="btn">Открыть</a>
+    </div>
+    
+    <div class="api-card">
+        <div class="api-tags">
+            <span class="api-tag">API</span>
+            <span class="api-tag">ASYNC</span>
+        </div>
+        <h3>Reminders API</h3>
+        <p>Планировщик фоновых напоминаний с отложенным выполнением.</p>
+        <a href="{{ url_for('api_docs_bp.api_reminders') }}" class="btn">Открыть</a>
+    </div>
+
+    <div class="api-card">
+        <div class="api-tags">
+            <span class="api-tag">API</span>
+            <span class="api-tag">VALIDATION</span>
+        </div>
+        <h3>JSON Validator</h3>
+        <p>Форматирование и строгая валидация JSON по заданной схеме.</p>
+        <a href="{{ url_for('api_docs_bp.api_validator') }}" class="btn">Открыть</a>
+    </div>
+
+    <div class="api-card">
+        <div class="api-tags">
+            <span class="api-tag">API</span>
+            <span class="api-tag">PARSER</span>
+        </div>
+        <h3>News Aggregator</h3>
+        <p>Новостной агрегатор по ключевым словам из открытых источников.</p>
+        <a href="{{ url_for('api_docs_bp.api_news') }}" class="btn">Открыть</a>
+    </div>
+</div>
+{% endblock %}
