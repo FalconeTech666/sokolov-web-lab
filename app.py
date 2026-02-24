@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager,login_user, current_user
+from flask_login import LoginManager,login_user, current_user, logout_user
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db
@@ -127,6 +127,7 @@ def login():
 
         if user_obj and user_obj.check_password(password):
             login_user(user_obj)
+            session['user_login'] = login_input
             
             next_page = request.args.get('next')
             if next_page:
@@ -141,6 +142,7 @@ def login():
 @app.route('/logout/')
 def logout():
     session.pop('user_login', None)
+    logout_user()
     return redirect(url_for('index'))
 
 @app.route('/duck/')
