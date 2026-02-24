@@ -152,8 +152,9 @@ body {
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 0.9rem;
+    gap: 15px;
+    z-index: 10; 
+    position: relative;
 }
 
 .theme-toggle {
@@ -835,7 +836,13 @@ table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
 }
 
 /* --- Dropdown Menu --- */
-.nav-dropdown { position: relative; display: inline-block; }
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 12px;
+    margin-bottom: -12px;
+    z-index: 1000; /* Дропдаун должен быть выше чем действия */
+}
 .dropdown-toggle { cursor: pointer; }
 .dropdown-menu {
     display: none; position: absolute; top: 100%; left: 0;

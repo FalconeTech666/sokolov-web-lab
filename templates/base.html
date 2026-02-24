@@ -27,13 +27,13 @@
 
     <header class="site-header">
         <div class="container header-inner">
-            <!-- Логотип -->
+            <!-- 1. Логотип -->
             <a href="{{ url_for('index') }}" class="brand">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="brand-logo">
                 <span class="brand-title">Sokolov Web Lab</span>
             </a>
 
-            <!-- Навигация -->
+            <!-- 2. Навигация -->
             <nav class="main-nav">
                 <a href="{{ url_for('index') }}">{{ t.menu_home }}</a>
                 
@@ -50,16 +50,12 @@
 
                 <a href="{{ url_for('homework') }}">{{ t.menu_homework }}</a>
                 
-                <!-- Выпадающий список "API" со Swagger -->
+                <!-- Выпадающий список "API" -->
                 <div class="nav-dropdown">
                     <a href="{{ url_for('api_docs_bp.api_index') }}" class="dropdown-toggle">API ▾</a>
                     <div class="dropdown-menu">
-                        <!-- Swagger -->
                         <a href="/apidocs" target="_blank" class="swagger-link">📚 Swagger Docs</a>
-                        
                         <div class="dropdown-divider"></div>
-                        
-                        <!-- Ваши страницы API -->
                         <a href="{{ url_for('api_docs_bp.api_tasks') }}">Tasks API</a>
                         <a href="{{ url_for('api_docs_bp.api_reminders') }}">Reminders API</a>
                         <a href="{{ url_for('api_docs_bp.api_validator') }}">Validator API</a>
@@ -68,15 +64,12 @@
                 </div>
             </nav>
 
-            <!-- Действия: Языки, Тема, Вход -->
+            <!-- 3. Действия (Справа) -->
             <div class="header-actions">
-                
                 <!-- Переключатель Языка -->
-                 <div class="lang-toggle">
-                    <a href="{{ url_for('set_lang', lang_code='ru') }}" 
-                       class="lang-btn {{ 'active' if current_lang == 'ru' else '' }}">RU</a>
-                    <a href="{{ url_for('set_lang', lang_code='en') }}" 
-                       class="lang-btn {{ 'active' if current_lang == 'en' else '' }}">EN</a>
+                <div class="lang-toggle">
+                    <a href="{{ url_for('set_lang', lang_code='ru') }}" class="lang-btn {{ 'active' if current_lang == 'ru' else '' }}">RU</a>
+                    <a href="{{ url_for('set_lang', lang_code='en') }}" class="lang-btn {{ 'active' if current_lang == 'en' else '' }}">EN</a>
                 </div>
 
                 <!-- Переключатель Темы -->
@@ -85,19 +78,17 @@
                     <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
 
-                <!-- БЛОК АВТОРИЗАЦИИ (Исправлена кликабельность и добавлено приветствие) -->
-                <div class="auth-buttons" style="display: flex; gap: 10px; align-items: center; position: relative; z-index: 1001;">
+                <!-- Авторизация -->
+                <div class="auth-buttons">
                     {% if user %}
-                        <!-- Вернули t.hello -->
-                        <span style="font-weight: 500;">{{ t.hello }}, {{ user.login }}</span>
+                        <!-- Исправлено на t.hello -->
+                        <span style="font-weight: 500; margin-right: 10px;">{{ t.hello }}, {{ user.login }}</span>
                         <a href="{{ url_for('logout') }}" class="btn-outline-small">{{ t.logout }}</a>
                     {% else %}
-                        <!-- Кнопки всегда поверх благодаря z-index -->
                         <a href="{{ url_for('login') }}" class="btn" style="color: #ffffff !important;">{{ t.login }}</a>
                         <a href="{{ url_for('register') }}" class="btn-outline-small">{{ t.register }}</a>
                     {% endif %}
                 </div>
-
             </div>
         </div>
     </header>
