@@ -7,11 +7,12 @@ from models import db
 from datetime import datetime
 import requests
 import re
+import os
 
 from translations import texts
 
 app = Flask(__name__)
-app.secret_key = 'super_secret_key_sokolov_2026'
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'dev-only-change-me')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -173,7 +174,7 @@ def fox(count=1):
     return render_template('fox.html', user=user, images=images, count=count)
 
 def get_weather_for_city(city):
-    api_key = 'c20b707c789771eddf22032f24f790ac' 
+    api_key = os.getenv('OPENWEATHER_API_KEY', '')
     url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=ru'
     
     try:

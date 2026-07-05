@@ -2,11 +2,12 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import List
 import httpx
+import os
 
 router = APIRouter()
 
 GNEWS_BASE_URL = "https://gnews.io/api/v4/search"
-API_KEY = "ebffd11d2edb974ca19f5c260ad37fef"  
+API_KEY = os.getenv("GNEWS_API_KEY", "")
 
 class NewsArticle(BaseModel):
     title: str = Field(..., description="Заголовок новости")
